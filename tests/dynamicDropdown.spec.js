@@ -85,3 +85,20 @@ test('suggestion Class4', async ({ page }) => {
     await options.filter({ hasText: 'Srilanka' }).first().click();
 
 });
+
+test('suggestion Class5', async ({ page }) => {
+    test.slow(); // makes it easier to observe UI during debugging
+
+    await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
+
+    const sug = page.locator('xpath=//input[@id="autocomplete"]');
+    await sug.click();
+    await sug.fill(''); // clear the field
+    await sug.pressSequentially('af', { delay: 1000 }); // type slowly to mimic real user
+
+    // Wait for the suggestions to appear and select the one with 'Srilanka'
+    const options = page.locator('#ui-id-1 li');
+    await options.filter({ hasText: 'Srilanka' }).first().click();
+
+});
+
